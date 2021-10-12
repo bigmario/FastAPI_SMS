@@ -16,7 +16,3 @@ app.include_router(sms_router)
 @remove_422
 async def index():
     return JSONResponse({'message': 'FastAPI Send SMS via Twilio!!'})
-
-
-
-
