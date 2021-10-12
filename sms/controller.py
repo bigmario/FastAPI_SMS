@@ -1,5 +1,5 @@
 from __future__ import annotations
-from fastapi import APIRouter, status, Form, status
+from fastapi import APIRouter, status, status
 
 from error_handlers.schemas.bad_gateway import BadGatewayError
 from error_handlers.schemas.unauthorized import UnauthorizedError

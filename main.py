@@ -1,5 +1,5 @@
 
-from fastapi import FastAPI, Form, status
+from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from sms.controller import sms_router

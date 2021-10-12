@@ -1,5 +1,4 @@
 import asyncio
-from fastapi.params import Body
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 from sms.config import config
