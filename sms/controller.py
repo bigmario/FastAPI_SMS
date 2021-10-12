@@ -28,5 +28,4 @@ async def send_sms(body : Sms):
     Send SMS from Body:
     """
     sms_service: SmsService = SmsService()
-    return sms_service.send_sms(body)
-    
+    return await sms_service.handle_form(body)
