@@ -1,8 +1,9 @@
-from __future__ import annotations
+from fastapi import Body
 from fastapi import APIRouter, status, status
 
 from error_handlers.schemas.bad_gateway import BadGatewayError
 from error_handlers.schemas.unauthorized import UnauthorizedError
+from error_handlers.schemas.not_found import NotFoundError
 
 from .schemas.post_sms import Sms
 
@@ -16,13 +17,19 @@ sms_router = APIRouter(
     responses={
         status.HTTP_502_BAD_GATEWAY: {"model": BadGatewayError},
         status.HTTP_401_UNAUTHORIZED: {"model": UnauthorizedError},
+        status.HTTP_404_NOT_FOUND: {"model": NotFoundError},
     },
 )
 
 
-@sms_router.post("/sms", response_model_exclude_unset=True)
+@sms_router.post(
+    path="/sms",
+    status_code=status.HTTP_200_OK,
+    summary="Send SMS via Twilio",
+    response_model_exclude_unset=True,
+)
 @remove_422
-async def send_sms(body: Sms):
+async def send_sms(body: Sms = Body(...)):
     """
     Send SMS from Body:
     """

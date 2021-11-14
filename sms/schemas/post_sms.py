@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Sms(BaseModel):
-    to: str
-    body: str
+    to: str = Field(...)
+    body: str = Field(...)
 

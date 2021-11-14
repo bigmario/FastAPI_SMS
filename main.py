@@ -11,7 +11,7 @@ app = FastAPI()
 app.include_router(sms_router)
 
 
-@app.get("/")
+@app.get(path="/", summary="Index", tags=["Index"])
 @remove_422
 async def index():
     return JSONResponse({"Hello": "FastAPI Send SMS via Twilio!!"})
