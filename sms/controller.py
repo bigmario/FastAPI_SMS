@@ -19,11 +19,10 @@ sms_router = APIRouter(
     },
 )
 
-@sms_router.post("/sms",
-                response_model_exclude_unset=True,
-                responses={status.HTTP_401_UNAUTHORIZED: {"model": UnauthorizedError}})
+
+@sms_router.post("/sms", response_model_exclude_unset=True)
 @remove_422
-async def send_sms(body : Sms):
+async def send_sms(body: Sms):
     """
     Send SMS from Body:
     """
