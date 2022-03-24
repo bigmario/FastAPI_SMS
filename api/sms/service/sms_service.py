@@ -1,11 +1,11 @@
 import asyncio
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
-from sms.config import config
+from api.sms.config import config
 
 import logging
 
-from sms.schemas.post_sms import Sms
+from api.sms.schemas.post_sms import Sms
 
 from fastapi.responses import JSONResponse
 from fastapi import status
@@ -37,4 +37,3 @@ class SmsService:
             return JSONResponse(result, status_code=status.HTTP_200_OK)
         else:
             return JSONResponse(result, status_code=status.HTTP_400_BAD_REQUEST)
-

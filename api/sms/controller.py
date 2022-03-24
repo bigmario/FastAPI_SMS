@@ -1,15 +1,15 @@
 from fastapi import Body
 from fastapi import APIRouter, status, status
 
-from error_handlers.schemas.bad_gateway import BadGatewayError
-from error_handlers.schemas.unauthorized import UnauthorizedError
-from error_handlers.schemas.not_found import NotFoundError
+from api.error_handlers.schemas.bad_gateway import BadGatewayError
+from api.error_handlers.schemas.unauthorized import UnauthorizedError
+from api.error_handlers.schemas.not_found import NotFoundError
 
-from .schemas.post_sms import Sms
+from api.sms.schemas.post_sms import Sms
 
-from utils.remove_422 import remove_422
+from api.utils.remove_422 import remove_422
 
-from .service.sms_service import SmsService
+from api.sms.service.sms_service import SmsService
 
 
 sms_router = APIRouter(
