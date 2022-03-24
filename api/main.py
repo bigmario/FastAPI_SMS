@@ -31,4 +31,9 @@ app.include_router(email_router)
 @app.get(path="/", summary="Index", tags=["Index"])
 @remove_422
 async def index():
-    return JSONResponse({"Hello": "FastAPI Send SMS via Twilio & Email via ? !!"})
+    return JSONResponse(
+        {
+            "Framework": "FastAPI",
+            "Message": "Send SMS via Twilio & Email via Fastapi-mail !!",
+        }
+    )
