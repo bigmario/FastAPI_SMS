@@ -85,6 +85,6 @@ async def get_one_subscription(id: PydanticObjectId = Path(...)) -> Subscription
     response_model_exclude_unset=True,
 )
 @remove_422
-async def delete_student_data(id: PydanticObjectId) -> dict:
+async def delete_student_data(id: PydanticObjectId = Path(...)) -> dict:
     subscription_service: SubscriptionService = SubscriptionService()
     return await subscription_service.delete_subscription(id)
