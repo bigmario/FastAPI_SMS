@@ -3,9 +3,10 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    twilio_account_sid: str
-    twilio_auth_token: str
-    twilio_phone_number: str
+    secret_key: str
+    redis_url: str
+    host: str
+    log_level: str
 
     class Config:
         env_file = ".env"

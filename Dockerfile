@@ -10,4 +10,4 @@ COPY ./api /code/api
 
 EXPOSE 8000
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0"]
+CMD ["python", "main.py"]

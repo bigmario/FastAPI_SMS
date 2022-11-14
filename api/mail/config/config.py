@@ -18,4 +18,4 @@ class Settings(BaseSettings):
     mail_use_ssl: bool
 
     class Config:
-        env_file = f"{os.getcwd()}/api/.env"
+        env_file = ".env"
