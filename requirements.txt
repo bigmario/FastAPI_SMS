@@ -6,3 +6,4 @@ black
 email-validator
 fastapi-mail
 gunicorn
+beanie
