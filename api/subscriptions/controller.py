@@ -89,11 +89,13 @@ async def get_one_subscription(
     id: PydanticObjectId = Path(...),
     subscription_service: SubscriptionService = Depends(),
 ) -> Subscription:
-    try:
-        subscription = await subscription_service.get_one_subscription(id)
+    subscription = await subscription_service.get_one_subscription(id)
+    if subscription:
         return subscription
-    except Exception as e:
-        return f"An exception occurred: {e}"
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Subscription not found!"
+        )
 
 
 #############################
@@ -112,7 +114,7 @@ async def delete_subscription(
 ) -> dict:
     try:
         return await subscription_service.delete_subscription(id)
-    except Exception as e:
+    except Exception:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Subscription not found!"
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Subscription not found!"
         )
