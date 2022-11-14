@@ -28,9 +28,7 @@ sms_router = APIRouter(
     response_model_exclude_unset=True,
 )
 @remove_422
-async def send_sms(
-    body: Sms = Body(...), sms_service: SmsService = Depends(SmsService)
-):
+async def send_sms(body: Sms = Body(...), sms_service: SmsService = Depends()):
     """
     Send SMS from Body:
     """

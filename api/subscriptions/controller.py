@@ -43,7 +43,7 @@ subscription_router = APIRouter(
 @remove_422
 async def subscribe(
     body: Subscription = Body(...),
-    subscription_service: SubscriptionService = Depends(SubscriptionService),
+    subscription_service: SubscriptionService = Depends(),
 ):
     """
     Subscribe:
@@ -66,7 +66,7 @@ async def subscribe(
 )
 @remove_422
 async def get_all_subscriptions(
-    subscription_service: SubscriptionService = Depends(SubscriptionService),
+    subscription_service: SubscriptionService = Depends(),
 ) -> List[Subscription]:
     try:
         return await subscription_service.get_all_subscriptions()
@@ -87,7 +87,7 @@ async def get_all_subscriptions(
 @remove_422
 async def get_one_subscription(
     id: PydanticObjectId = Path(...),
-    subscription_service: SubscriptionService = Depends(SubscriptionService),
+    subscription_service: SubscriptionService = Depends(),
 ) -> Subscription:
     try:
         subscription = await subscription_service.get_one_subscription(id)
@@ -108,7 +108,7 @@ async def get_one_subscription(
 @remove_422
 async def delete_subscription(
     id: PydanticObjectId = Path(...),
-    subscription_service: SubscriptionService = Depends(SubscriptionService),
+    subscription_service: SubscriptionService = Depends(),
 ) -> dict:
     try:
         return await subscription_service.delete_subscription(id)

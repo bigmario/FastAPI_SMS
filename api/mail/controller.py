@@ -31,7 +31,7 @@ email_router = APIRouter(
 @remove_422
 async def send_email(
     body: Email = Body(...),
-    email_service: EmailService = Depends(EmailService),
+    email_service: EmailService = Depends(),
 ):
     """
     Send Email from Body:
@@ -42,7 +42,7 @@ async def send_email(
 @email_router.post("/send-email/asynchronous")
 async def send_email_asynchronous(
     body: Email = Body(...),
-    email_service: EmailService = Depends(EmailService),
+    email_service: EmailService = Depends(),
 ):
     await email_service.send_email_async(body)
     return "Success"
@@ -52,7 +52,7 @@ async def send_email_asynchronous(
 def send_email_backgroundtasks(
     background_tasks: BackgroundTasks,
     body: Email = Body(...),
-    email_service: EmailService = Depends(EmailService),
+    email_service: EmailService = Depends(),
 ):
     email_service.send_email_background(background_tasks, body)
     return "Success"
