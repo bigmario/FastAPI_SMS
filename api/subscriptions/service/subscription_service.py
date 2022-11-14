@@ -29,11 +29,5 @@ class SubscriptionService:
 
     async def delete_subscription(self, id: PydanticObjectId) -> dict:
         sub = await Subscription.get(id)
-
-        if not sub:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="Subscription not found!"
-            )
-
         await sub.delete()
         return {"message": "Subscription deleted successfully"}

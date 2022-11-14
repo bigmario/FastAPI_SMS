@@ -43,6 +43,6 @@ async def index():
     return JSONResponse(
         {
             "Framework": "FastAPI",
-            "Message": "Send SMS via Twilio & Email via Fastapi-mail !!",
+            "Message": "Subscribe to Mailing List , Send SMS via Twilio & Email via Fastapi-mail !!",
         }
     )

@@ -22,9 +22,13 @@ services:
       - 8000:8000
     networks:
       - main-network
+    volumes:
+      - api:/code
   
 volumes:
   mongo-db:
+    driver: local
+  api:
     driver: local
 
 networks:
