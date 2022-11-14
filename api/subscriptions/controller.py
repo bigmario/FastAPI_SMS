@@ -31,7 +31,7 @@ subscription_router = APIRouter(
 
 @subscription_router.post(
     path="/subscription",
-    status_code=status.HTTP_200_OK,
+    status_code=status.HTTP_201_CREATED,
     summary="Subscribe",
     response_model_exclude_unset=True,
 )
@@ -53,10 +53,11 @@ async def subscribe(body: Subscription = Body(...)):
     path="/subscription",
     status_code=status.HTTP_200_OK,
     summary="Get All Subscriptions",
+    response_model=List[Subscription],
     response_model_exclude_unset=True,
 )
 @remove_422
-async def get_one_subscription() -> List[Subscription]:
+async def get_all_subscriptions() -> List[Subscription]:
     subscription_service: SubscriptionService = SubscriptionService()
     return await subscription_service.get_all_subscriptions()
 
@@ -70,6 +71,7 @@ async def get_one_subscription() -> List[Subscription]:
     path="/subscription/{id}",
     status_code=status.HTTP_200_OK,
     summary="Get One Subscription By ID",
+    response_model=Subscription,
     response_model_exclude_unset=True,
 )
 @remove_422
@@ -85,6 +87,6 @@ async def get_one_subscription(id: PydanticObjectId = Path(...)) -> Subscription
     response_model_exclude_unset=True,
 )
 @remove_422
-async def delete_student_data(id: PydanticObjectId = Path(...)) -> dict:
+async def delete_subscription(id: PydanticObjectId = Path(...)) -> dict:
     subscription_service: SubscriptionService = SubscriptionService()
     return await subscription_service.delete_subscription(id)

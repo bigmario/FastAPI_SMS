@@ -4,8 +4,6 @@ from beanie import PydanticObjectId
 from fastapi import Body, HTTPException, status
 from fastapi.responses import JSONResponse
 
-from api.error_handlers.schemas.not_found import NotFoundError
-
 from api.subscriptions.schemas.subscriptions import Subscription
 
 
@@ -16,7 +14,7 @@ class SubscriptionService:
         if not existing_sub:
             await body.create()
             return JSONResponse(
-                {"Message": "Subscribed!!"}, status_code=status.HTTP_200_OK
+                {"Message": "Subscribed!!"}, status_code=status.HTTP_201_CREATED
             )
         else:
             return JSONResponse(
