@@ -1,5 +1,5 @@
 from fastapi import Body, BackgroundTasks
-from fastapi import APIRouter, status, status
+from fastapi import APIRouter, status, Depends
 
 from api.error_handlers.schemas.bad_gateway import BadGatewayError
 from api.error_handlers.schemas.unauthorized import UnauthorizedError
@@ -29,25 +29,30 @@ email_router = APIRouter(
     response_model_exclude_unset=True,
 )
 @remove_422
-async def send_email(body: Email = Body(...)):
+async def send_email(
+    body: Email = Body(...),
+    email_service: EmailService = Depends(EmailService),
+):
     """
     Send Email from Body:
     """
-    sms_service: EmailService = EmailService()
-    return await sms_service.send_email(body)
+    return await email_service.send_email(body)
 
 
 @email_router.post("/send-email/asynchronous")
-async def send_email_asynchronous(body: Email = Body(...)):
-    sms_service: EmailService = EmailService()
-    await sms_service.send_email_async(body)
+async def send_email_asynchronous(
+    body: Email = Body(...),
+    email_service: EmailService = Depends(EmailService),
+):
+    await email_service.send_email_async(body)
     return "Success"
 
 
 @email_router.post("/send-email/backgroundtasks")
 def send_email_backgroundtasks(
-    background_tasks: BackgroundTasks, body: Email = Body(...)
+    background_tasks: BackgroundTasks,
+    body: Email = Body(...),
+    email_service: EmailService = Depends(EmailService),
 ):
-    sms_service: EmailService = EmailService()
-    sms_service.send_email_background(background_tasks, body)
+    email_service.send_email_background(background_tasks, body)
     return "Success"

@@ -1,5 +1,4 @@
-from fastapi import Body
-from fastapi import APIRouter, status, status
+from fastapi import APIRouter, status, Body, Depends
 
 from api.error_handlers.schemas.bad_gateway import BadGatewayError
 from api.error_handlers.schemas.unauthorized import UnauthorizedError
@@ -29,9 +28,10 @@ sms_router = APIRouter(
     response_model_exclude_unset=True,
 )
 @remove_422
-async def send_sms(body: Sms = Body(...)):
+async def send_sms(
+    body: Sms = Body(...), sms_service: SmsService = Depends(SmsService)
+):
     """
     Send SMS from Body:
     """
-    sms_service: SmsService = SmsService()
     return await sms_service.handle_form(body)
