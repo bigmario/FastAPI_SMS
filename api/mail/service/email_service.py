@@ -1,6 +1,6 @@
 import os
 from fastapi import Body, status, BackgroundTasks
-from fastapi.responses import JSONResponse
+
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 
 from api.mail.config import config as conf
@@ -23,11 +23,6 @@ class EmailService:
             MAIL_SSL=bool(settings.mail_use_ssl),
             USE_CREDENTIALS=True,
             TEMPLATE_FOLDER=f"{os.getcwd()}/api/mail/templates",
-        )
-
-    async def send_email(self, body: Email):
-        return JSONResponse(
-            {"Message": "FastAPI Email Sent!!"}, status_code=status.HTTP_200_OK
         )
 
     async def send_email_async(self, body: Email):
