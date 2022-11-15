@@ -23,23 +23,6 @@ email_router = APIRouter(
 )
 
 
-@email_router.post(
-    path="/email",
-    status_code=status.HTTP_200_OK,
-    summary="Send EMAIL",
-    response_model_exclude_unset=True,
-)
-@remove_422
-async def send_email(
-    body: Email = Body(...),
-    email_service: EmailService = Depends(),
-):
-    """
-    Send Email from Body:
-    """
-    return await email_service.send_email(body)
-
-
 @email_router.post("/send-email/asynchronous")
 async def send_email_asynchronous(
     body: Email = Body(...),
